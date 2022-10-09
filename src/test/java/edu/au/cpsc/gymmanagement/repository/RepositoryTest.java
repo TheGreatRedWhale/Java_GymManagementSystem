@@ -3,10 +3,11 @@ package edu.au.cpsc.gymmanagement.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.au.cpsc.gymmanagement.entity.Entity;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,11 @@ public abstract class RepositoryTest<E extends Entity, R extends Repository<E>> 
   @BeforeEach
   public void setUp(){
     repository = createRepository();
+  }
+
+  @AfterEach
+  public void tearDown(){
+    repository.deleteAll();
   }
 
   // TEST METHODS ----------------------------------------------------------------------------------
@@ -66,23 +72,23 @@ public abstract class RepositoryTest<E extends Entity, R extends Repository<E>> 
   }
 
   @Test
-  public void when_entity_found_by_id_twice_then_objects_same() {
+  public void when_entity_found_by_id_twice_then_objects_equal() {
     E entity = createEntity();
     Long id = repository.save(entity);
 
     var entityFromRepository1 = repository.findOne(id);
     var entityFromRepository2 = repository.findOne(id);
 
-    assertSame(entityFromRepository1, entityFromRepository2);
+    assertEquals(entityFromRepository1.toString(), entityFromRepository2.toString());
   }
 
   @Test
-  public void when_entity_found_by_find_all_then_objects_same() {
+  public void when_entity_found_by_find_all_then_objects_equal() {
     E entity = createEntity();
     Long id = repository.save(entity);
     List<E> entities = repository.findAll();
     var psFromRepository = repository.findOne(id);
-    assertSame(entities.get(0), psFromRepository);
+    assertEquals(entities.get(0).toString(), psFromRepository.toString());
   }
 
   @Test

@@ -3,6 +3,7 @@ package edu.au.cpsc.gymmanagement.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,7 +20,7 @@ public class Client extends Entity {
   private LocalDate      birthdate; // required
 
   private Address        address;   // required
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER)
   private List<Contract> contracts; // required
   private String         email;     // optional
 

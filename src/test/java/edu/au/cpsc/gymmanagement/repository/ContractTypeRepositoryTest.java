@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 public abstract class ContractTypeRepositoryTest extends
     RepositoryTest<ContractType, ContractTypeRepository> {
 
+  // UTILITY METHODS -------------------------------------------------------------------------------
+
   @Override
   protected ContractType createEntity() {
     var name = "Test Membership";

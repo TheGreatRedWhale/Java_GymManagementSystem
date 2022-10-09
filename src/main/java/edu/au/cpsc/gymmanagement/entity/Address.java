@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
  * Class representation of street addresses.
  */
 @Embeddable
-public class Address {
+public class Address implements Comparable<Address> {
 
   // INSTANCE VARIABLES ----------------------------------------------------------------------------
 
@@ -61,5 +61,22 @@ public class Address {
     output += (", " + state);
     output += (" " + zipCode);
     return output;
+  }
+
+  /**
+   * Compares this object with the specified object for order.  Returns a negative integer, zero, or
+   * a positive integer as this object is less than, equal to, or greater than the specified
+   * object.
+   *
+   * @param that the object to be compared.
+   * @return a negative integer, zero, or a positive integer as this object is less than, equal to,
+   * or greater than the specified object.
+   * @throws NullPointerException if the specified object is null
+   * @throws ClassCastException   if the specified object's type prevents it from being compared to
+   *                              this object.
+   */
+  @Override
+  public int compareTo(Address that) {
+    return this.toString().compareTo(that.toString());
   }
 }

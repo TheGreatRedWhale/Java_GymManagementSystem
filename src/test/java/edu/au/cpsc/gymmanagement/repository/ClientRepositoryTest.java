@@ -1,6 +1,7 @@
 package edu.au.cpsc.gymmanagement.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.au.cpsc.gymmanagement.entity.Address;
 import edu.au.cpsc.gymmanagement.entity.Client;
@@ -17,8 +18,8 @@ public abstract class ClientRepositoryTest extends RepositoryTest<Client, Client
 
   // INSTANCE VARIABLES ----------------------------------------------------------------------------
 
-  ContractRepository contractRepository;
-  ContractTypeRepository contractTypeRepository;
+  protected ContractRepository contractRepository;
+  protected ContractTypeRepository contractTypeRepository;
 
   // ABSTRACT METHODS ------------------------------------------------------------------------------
 
@@ -49,8 +50,10 @@ public abstract class ClientRepositoryTest extends RepositoryTest<Client, Client
     assertEquals(c1.getId(), c2.getId());
     assertEquals(c1.getName(), c2.getName());
     assertEquals(c1.getBirthdate(), c2.getBirthdate());
-    assertEquals(c1.getAddress(), c2.getAddress());
-    assertEquals(c1.getContracts(), c2.getContracts());
+    assertEquals(c1.getAddress().toString(), c2.getAddress().toString());
+    for (int i = 0; i < c1.getContracts().size(); i++) {
+      assertEquals(c1.getContracts().get(i), c2.getContracts().get(i));
+    }
     assertEquals(c1.getEmail(), c2.getEmail());
   }
 

@@ -12,16 +12,14 @@ import org.springframework.context.annotation.ComponentScan;
 @Transactional
 public class SpringContractTypeRepositoryTest extends ContractTypeRepositoryTest {
 
-  private SpringContractTypeRepository springContractTypeRepository;
-
   @Autowired
-  protected void setSpringContractTypeRepository(
+  protected void setSpringRepositories(
       SpringContractTypeRepository springContractTypeRepository) {
-    this.springContractTypeRepository = springContractTypeRepository;
+    this.repository = springContractTypeRepository;
   }
 
   @Override
   protected ContractTypeRepository createRepository() {
-    return null;
+    return repository;
   }
 }

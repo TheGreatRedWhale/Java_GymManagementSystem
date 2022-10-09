@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SpringContractRepository implements ContractRepository {
 
-  private SpringContractCrudRepository springContractCrudRepository;
+  private final SpringContractCrudRepository springContractCrudRepository;
 
   public SpringContractRepository(
       SpringContractCrudRepository springContractCrudRepository) {
@@ -33,5 +33,10 @@ public class SpringContractRepository implements ContractRepository {
   @Override
   public Contract findOne(Long id) {
     return springContractCrudRepository.findById(id).orElse(null);
+  }
+
+  @Override
+  public void deleteAll() {
+    springContractCrudRepository.deleteAll();
   }
 }

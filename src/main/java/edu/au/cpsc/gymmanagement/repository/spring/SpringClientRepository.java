@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SpringClientRepository implements ClientRepository {
 
-  private SpringClientCrudRepository springClientCrudRepository;
+  private final SpringClientCrudRepository springClientCrudRepository;
 
   public SpringClientRepository(
       SpringClientCrudRepository springClientCrudRepository) {
@@ -33,5 +33,10 @@ public class SpringClientRepository implements ClientRepository {
   @Override
   public Client findOne(Long id) {
     return springClientCrudRepository.findById(id).orElse(null);
+  }
+
+  @Override
+  public void deleteAll() {
+    springClientCrudRepository.deleteAll();
   }
 }

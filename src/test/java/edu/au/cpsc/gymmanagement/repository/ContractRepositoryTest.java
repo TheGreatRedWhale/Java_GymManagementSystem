@@ -6,6 +6,7 @@ import edu.au.cpsc.gymmanagement.entity.Contract;
 import edu.au.cpsc.gymmanagement.entity.ContractType;
 import java.time.LocalDate;
 import javax.transaction.Transactional;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 @Transactional
@@ -13,7 +14,7 @@ public abstract class ContractRepositoryTest extends RepositoryTest<Contract, Co
 
   // INSTANCE VARIABLES ----------------------------------------------------------------------------
 
-  ContractTypeRepository contractTypeRepository;
+  protected ContractTypeRepository contractTypeRepository;
 
   // ABSTRACT METHODS ------------------------------------------------------------------------------
 
@@ -30,6 +31,13 @@ public abstract class ContractRepositoryTest extends RepositoryTest<Contract, Co
         new ContractType("Trial Membership", "1 week", 0.00));
     contractTypeRepository.save(
         new ContractType("Basic Membership", "1 month", 10.00));
+  }
+
+  @Override
+  @AfterEach
+  public void tearDown(){
+    repository.deleteAll();
+    contractTypeRepository.deleteAll();
   }
 
   @Override
